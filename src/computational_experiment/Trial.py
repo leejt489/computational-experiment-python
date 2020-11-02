@@ -42,7 +42,7 @@ class Trial:
         return {
             'is_completed': self.is_completed,
             'confounding_variables': self.confounding_variables,
-            'outputs': self.outputs
+            'outputs': [output.to_json_serializable() for output in self.outputs]
         }
 
     def get_test_case(self, ind: int) -> TestCase:

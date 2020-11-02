@@ -171,7 +171,7 @@ class Experiment(ABC):
             self._rng = default_rng(self._test_seeds[trial_ind])
             self._rand_state = RandomState(MT19937(self._test_seeds[trial_ind]))
             print(f'Simulating independent variables {ind+1} of {self.n_iv_instances} for trial {trial_ind}...')
-            output = self.simulate_test_set(TestSetClass(trial, ind))
+            output = self.simulate_test_set(self.TestSetClass(trial, ind))
             trial.outputs[ind] = output
             print('...done')
         trial.is_completed = True
@@ -196,6 +196,3 @@ class Experiment(ABC):
         with open(f'{self.outputs_dir}/trials/{trial.id}.json', 'w') as f:
             json.dump(trial.to_dict(), f)
         self._completed_trials_dirty = True
-
-
-
